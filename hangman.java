@@ -1,8 +1,28 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;;
 
 public class hangman {
     public static void main(String[] args) {
-        Scanner sc = new SCanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Let's Play Hangman!");
+
+        List<String> words = new ArrayList<String>();
+        try {
+            File file = new File("input/dictionary.txt");
+            Scanner fileScanner = new Scanner(file);
+
+            while (fileScanner.hasNextLine()) {
+                String word = fileScanner.nextLine();
+                words.add(word);
+            }
+            fileScanner.close();
+        } catch (FileNotFoundException e ) {
+            System.out.println("File not found!");
+        }
+
 
         
     }

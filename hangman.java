@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Random;
-import java.util.ArrayList;;
+import java.util.ArrayList;
 
 public class hangman {
     public static void main(String[] args) {
@@ -35,13 +35,40 @@ public class hangman {
 
         int attemptsLeft = 6; // number of attempts allowed
         
-        System.out.println("Current Progress: " + progress);
-        int numGuesses = 0;
-        while (numGuesses < 6 && !progress.equals(targetWord)) {
-            System.out.println("Guess a letter: ");
-            String guess = sc.nextLine();
-            // Add logic to update progress based on guess
-            numGuesses++;
+        while (attemptsLeft > 0) {
+            System.out.println("Current Progress: " + progress);
+            System.out.println("Attempts left: " + attemptsLeft);
+            System.out.println("Guess a letter:");
+            String letter = sc.nextLine();
+
+            // check if the letter is in the target word
+            boolean foundLetter = false;
+            for (int i = 0; i < targetWord.length(); i++) {
+                if (targetWord.charAt(i) == letter.charAt(0)) {
+                    // update the progress if the letter is found
+                    StringBuilder sb = new StringBuilder(progress);
+                    sb.setCharAt(i, letter.charAt(0));
+                    progress = sb.toString();
+                    foundLetter = true;
+                }
+            }
+
+            if (foundLetter) {
+                System.out.println("Correct!");
+            } else {
+                System.out.println("Incorrect.");
+                attemptsLeft--;
+            }
+
+            // check if the player has won
+            if (progress.equals(targetWord)) {
+                System.out.println("You win! The word was:" + targetWord);
+                break;
+            }
+        }
+
+        if (attemptsLeft == 0) {
+            System.out.println("Game over. The word was: " + targetWord);
         }
 
     }

@@ -20,8 +20,29 @@ public class hangman {
                 words.add(word);
             }
             fileScanner.close();
-        } catch (FileNotFoundException e ) {
+        } catch (FileNotFoundException e) {
             System.out.println("File not found!");
+        }
+
+        System.out.println("Select Difficulty Level: ");
+        System.out.println("1. Easy (12 lives)");
+        System.out.println("2. Medium (9 lives)");
+        System.out.println("3. Hard (6 lives)");
+        int lives = 0;
+        int choice = sc.nextInt();
+        switch (choice) {
+            case 1:
+                lives = 12;
+                break;
+            case 2:
+                lives = 9;
+                break;
+            case 3:
+                lives = 6;
+                break;
+            default:
+                System.out.println("Invalid choice. Setting difficulty to Easy.");
+                lives = 12;
         }
 
         Random random = new Random();
@@ -33,37 +54,13 @@ public class hangman {
             progress += "_";
         }
 
-        int maxAttempts = 0;
-        boolean validDifficulty = false;
-        while (!validDifficulty) {
-            System.out.println("Choose difficulty level (1-3):");
-            int difficulty = sc.nextInt();
-            switch (difficulty) {
-                case 1:
-                    maxAttempts = 8;
-                    validDifficulty = true;
-                    break;
-                case 2:
-                    maxAttempts = 6;
-                    validDifficulty = true;
-                    break;
-                case 3:
-                    maxAttempts = 4;
-                    validDifficulty = true;
-                    break;
-                default:
-                    System.out.println("Invalid difficulty level!");
-                    break;
-            }
-        }
-
-        int attemptsLeft = maxAttempts;
-
+        int attemptsLeft = lives; // number of attempts allowed
+        int score = 0;
         while (attemptsLeft > 0) {
             System.out.println("Current Progress: " + progress);
             System.out.println("Attempts left: " + attemptsLeft);
             System.out.println("Guess a letter:");
-            String letter = sc.next().toLowerCase();
+            String letter = sc.next();
 
             // check if the letter is in the target word
             boolean foundLetter = false;
@@ -86,7 +83,9 @@ public class hangman {
 
             // check if the player has won
             if (progress.equals(targetWord)) {
+                score = attemptsLeft * 10; // calculate score
                 System.out.println("You win! The word was: " + targetWord);
+                System.out.println("Your score is: " + score);
                 break;
             }
         }

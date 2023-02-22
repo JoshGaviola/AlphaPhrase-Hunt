@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
+import java.util.Random;
 import java.util.ArrayList;;
 
 public class hangman {
@@ -23,7 +24,15 @@ public class hangman {
             System.out.println("File not found!");
         }
 
+        Random random = new Random();
+        int randomIndex = random.nextInt(words.size());
+        String targetWord = words.get(randomIndex);
 
-        
+        String progress = "";
+        for (int i = 0; i < targetWord.length(); i++) {
+            progress += "_";
+            System.out.println("Current Progress: " + progress);
+        }
+
     }
 }

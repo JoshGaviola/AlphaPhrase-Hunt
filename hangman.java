@@ -33,13 +33,37 @@ public class hangman {
             progress += "_";
         }
 
-        int attemptsLeft = 6; // number of attempts allowed
-        
+        int maxAttempts = 0;
+        boolean validDifficulty = false;
+        while (!validDifficulty) {
+            System.out.println("Choose difficulty level (1-3):");
+            int difficulty = sc.nextInt();
+            switch (difficulty) {
+                case 1:
+                    maxAttempts = 8;
+                    validDifficulty = true;
+                    break;
+                case 2:
+                    maxAttempts = 6;
+                    validDifficulty = true;
+                    break;
+                case 3:
+                    maxAttempts = 4;
+                    validDifficulty = true;
+                    break;
+                default:
+                    System.out.println("Invalid difficulty level!");
+                    break;
+            }
+        }
+
+        int attemptsLeft = maxAttempts;
+
         while (attemptsLeft > 0) {
             System.out.println("Current Progress: " + progress);
             System.out.println("Attempts left: " + attemptsLeft);
             System.out.println("Guess a letter:");
-            String letter = sc.nextLine();
+            String letter = sc.next().toLowerCase();
 
             // check if the letter is in the target word
             boolean foundLetter = false;
@@ -62,7 +86,7 @@ public class hangman {
 
             // check if the player has won
             if (progress.equals(targetWord)) {
-                System.out.println("You win! The word was:" + targetWord);
+                System.out.println("You win! The word was: " + targetWord);
                 break;
             }
         }

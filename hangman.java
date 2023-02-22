@@ -31,7 +31,17 @@ public class hangman {
         String progress = "";
         for (int i = 0; i < targetWord.length(); i++) {
             progress += "_";
-            System.out.println("Current Progress: " + progress);
+        }
+
+        int attemptsLeft = 6; // number of attempts allowed
+        
+        System.out.println("Current Progress: " + progress);
+        int numGuesses = 0;
+        while (numGuesses < 6 && !progress.equals(targetWord)) {
+            System.out.println("Guess a letter: ");
+            String guess = sc.nextLine();
+            // Add logic to update progress based on guess
+            numGuesses++;
         }
 
     }

@@ -27,7 +27,7 @@ public class hangman {
         System.out.println("Select Difficulty Level: ");
         System.out.println("1. Easy (12 lives)");
         System.out.println("2. Medium (9 lives)");
-        System.out.println("3. Hard (6 lives)");
+        System.out.println("3. Hard (7 lives)");
         int lives = 0;
         int choice = sc.nextInt();
         switch (choice) {
@@ -38,7 +38,7 @@ public class hangman {
                 lives = 9;
                 break;
             case 3:
-                lives = 6;
+                lives = 7;
                 break;
             default:
                 System.out.println("Invalid choice. Setting difficulty to Easy.");
@@ -56,7 +56,46 @@ public class hangman {
 
         int attemptsLeft = lives; // number of attempts allowed
         int score = 0;
+
         while (attemptsLeft > 0) {
+
+            // add stickman representation
+            String[] stickman = new String[7];
+            stickman[0] = "  _____ ";
+            stickman[1] = "  |    |";
+            stickman[2] = "       |";
+            stickman[3] = "       |";
+            stickman[4] = "       |";
+            stickman[5] = "       |";
+            stickman[6] = "  _____|";
+
+            if (attemptsLeft < 7) {
+                stickman[2] = "  O    |";
+            }
+            if (attemptsLeft < 6) {
+                stickman[3] = "  |    |";
+            }
+            if (attemptsLeft < 5) {
+                stickman[3] = " /|    |";
+            }
+            if (attemptsLeft < 4) {
+                stickman[3] = " /|\\   |";
+            }
+            if (attemptsLeft < 3) {
+                stickman[4] = "  |    |";
+            }
+            if (attemptsLeft < 2) {
+                stickman[5] = " /     |";
+                stickman[6] = "  _____|";
+            }
+            if (attemptsLeft < 1) {
+                stickman[5] = " /\\     |";
+                stickman[6] = "  _____|";
+            }
+
+            String stickmanString = String.join("\n", stickman);
+            System.out.println(stickmanString);
+
             System.out.println("Current Progress: " + progress);
             System.out.println("Attempts left: " + attemptsLeft);
             System.out.println("Guess a letter:");
@@ -91,6 +130,13 @@ public class hangman {
         }
 
         if (attemptsLeft == 0) {
+            System.out.println("  _____ ");
+            System.out.println("  |    |");
+            System.out.println("  O    |");
+            System.out.println(" /|\\   |");
+            System.out.println("  |    |");
+            System.out.println(" / \\   |");
+            System.out.println("  _____|");
             System.out.println("Game over. The word was: " + targetWord);
         }
 

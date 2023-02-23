@@ -56,6 +56,7 @@ public class hangman {
 
         int attemptsLeft = lives; // number of attempts allowed
         int score = 0;
+        String guessedLetters = ""; // initialize an empty string for guessing the letters
 
         while (attemptsLeft > 0) {
 
@@ -98,8 +99,11 @@ public class hangman {
 
             System.out.println("Current Progress: " + progress);
             System.out.println("Attempts left: " + attemptsLeft);
+            System.out.println("Guessed letters: " + guessedLetters);
             System.out.println("Guess a letter:");
             String letter = sc.next();
+
+            guessedLetters += letter + ""; // add the guessed letter to the string of guessed letters
 
             // check if the letter is in the target word
             boolean foundLetter = false;
